@@ -21,7 +21,7 @@ export function ProjectsList({ dict, limit }: { dict: Dictionary["projects"]; li
 
 export function Projects({ dict }: { dict: Dictionary["projects"] }) {
   return (
-    <section id="proyectos" className="section-y relative">
+    <section id="proyectos" className="section-y relative border-t border-line">
       <div className="container-x">
         <SectionHeading eyebrow={dict.eyebrow} title={dict.title} description={dict.description} />
         <div className="mt-12">

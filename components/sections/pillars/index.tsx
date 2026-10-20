@@ -3,7 +3,7 @@ import { FlowDiagram } from "@/components/ui/flow-diagram";
 import { ScrollRevealText } from "@/components/ui/scroll-reveal-text";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
-import { getProject } from "@/content/projects";
+import { demoChat } from "@/content/demo-chat";
 import type { Dictionary } from "@/i18n";
 import { cn } from "@/lib/utils";
 
@@ -14,7 +14,6 @@ type Pillar = Dictionary["pillars"]["items"]["ai"];
 export function Pillars({ dict, chatLabels }: { dict: Dictionary["pillars"]; chatLabels: Dictionary["chat"] }) {
   const { ai, automation, fullstack } = dict.items;
   const { flow, dashboard } = dict.demos;
-  const chat = getProject("secreto-suites")?.chat;
 
   return (
     <section id="servicios" className="section-y relative">
@@ -29,7 +28,7 @@ export function Pillars({ dict, chatLabels }: { dict: Dictionary["pillars"]; cha
 
         <div className="mt-14 grid gap-4 lg:grid-cols-12 lg:grid-rows-2">
           <PillarCard pillar={ai} className="lg:col-span-7 lg:row-span-2" visualClassName="h-[420px] sm:h-[460px] lg:h-auto lg:min-h-[460px]">
-            {chat && <ChatReplay script={chat} labels={chatLabels} />}
+            <ChatReplay script={demoChat} labels={chatLabels} />
           </PillarCard>
           <PillarCard pillar={automation} className="lg:col-span-5" visualClassName="h-56">
             <FlowDiagram nodes={flow.nodes} edges={flow.edges} title={flow.title} done={flow.done} />

@@ -14,7 +14,7 @@ const PREVIEW_W = 360;
 const spring = { stiffness: 260, damping: 28, mass: 0.5 };
 
 /** Índice de sitios lanzados. En desktop, una vista previa del sitio sigue al cursor. */
-export function Launches({ dict }: { dict: Dictionary["launches"] }) {
+export function Launches({ dict, headingAs = "h2" }: { dict: Dictionary["launches"]; headingAs?: "h1" | "h2" }) {
   const [active, setActive] = useState<string | null>(null);
   // Solo se montan las capturas que ya se pidieron, así no se descargan 18 imágenes al cargar
   const [loaded, setLoaded] = useState<string[]>([]);
@@ -32,9 +32,9 @@ export function Launches({ dict }: { dict: Dictionary["launches"] }) {
   }
 
   return (
-    <section aria-labelledby="launches-title" className="section-y relative border-t border-line">
+    <section aria-labelledby="launches-title" className={cn("relative", headingAs === "h1" ? "pb-24 pt-36 sm:pt-44" : "section-y")}>
       <div className="container-x">
-        <SectionHeading titleId="launches-title" eyebrow={dict.eyebrow} title={dict.title} description={dict.description} />
+        <SectionHeading as={headingAs} titleId="launches-title" eyebrow={dict.eyebrow} title={dict.title} description={dict.description} />
 
         <ol className="mt-14 border-t border-line" onPointerMove={handleMove} onPointerLeave={() => setActive(null)}>
           {launches.map((launch, index) => (

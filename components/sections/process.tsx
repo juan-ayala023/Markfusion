@@ -80,7 +80,7 @@ export function Process({ dict }: { dict: ProcessDict }) {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="flex-1 rounded-md border border-line bg-surface-1/60 p-5">
-                <StepDetail step={step} dict={dict} compact />
+                <StepDetail step={step} compact />
               </div>
             </li>
           ))}
@@ -125,7 +125,7 @@ export function Process({ dict }: { dict: ProcessDict }) {
             </ol>
           </div>
 
-          <SpotlightCard className="relative min-h-[460px] overflow-hidden p-10">
+          <SpotlightCard className="relative min-h-[360px] overflow-hidden p-10">
             <AnimatePresence mode="wait" initial={false}>
               <m.div
                 key={active}
@@ -143,7 +143,7 @@ export function Process({ dict }: { dict: ProcessDict }) {
                 <p className="label-mono text-brand">
                   {dict.stepLabel} {String(active + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}
                 </p>
-                <StepDetail step={steps[active]} dict={dict} />
+                <StepDetail step={steps[active]} />
               </m.div>
             </AnimatePresence>
           </SpotlightCard>
@@ -153,29 +153,11 @@ export function Process({ dict }: { dict: ProcessDict }) {
   );
 }
 
-function StepDetail({ step, dict, compact = false }: { step: Step; dict: ProcessDict; compact?: boolean }) {
+function StepDetail({ step, compact = false }: { step: Step; compact?: boolean }) {
   return (
     <div className="relative">
       <h3 className={cn("font-semibold tracking-tight text-fg", compact ? "text-xl" : "mt-6 text-h2")}>{step.title}</h3>
       <p className={cn("leading-relaxed text-muted", compact ? "mt-2 text-[15px]" : "mt-5 max-w-md text-lg")}>{step.description}</p>
-      <dl className={cn("grid gap-5", compact ? "mt-5" : "mt-10 grid-cols-[auto_1fr] gap-x-12")}>
-        <div>
-          <dt className="label-mono text-subtle">{dict.duration}</dt>
-          <dd className="mt-2 text-sm text-fg">{step.duration}</dd>
-        </div>
-        <div>
-          <dt className="label-mono text-subtle">{dict.deliverables}</dt>
-          <dd className="mt-2">
-            <ul className="flex flex-wrap gap-2">
-              {step.deliverables.map((deliverable) => (
-                <li key={deliverable} className="rounded-full border border-line px-3 py-1 text-xs text-muted">
-                  {deliverable}
-                </li>
-              ))}
-            </ul>
-          </dd>
-        </div>
-      </dl>
     </div>
   );
 }

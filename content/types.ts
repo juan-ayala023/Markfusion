@@ -48,21 +48,22 @@ export type Project = {
   category: ProjectCategory[];
   /** Una frase: qué es y qué logra. Se usa en cards, metadata y Open Graph. */
   summary: string;
-  challenge: string;
-  solution: string;
+  challenge?: string;
+  solution?: string;
   /** Puntos concretos de la solución (opcional). */
   highlights?: string[];
   stack: string[];
   metrics: Metric[];
-  /** Ruta en /public. `null` → se genera un mockup elegante (navegador o teléfono). */
+  /** Ruta en /public. `null` → portada tipográfica con el nombre del cliente (sin simular capturas). */
   cover: string | null;
+  /** Aclaración bajo la portada del caso (por ejemplo, si la captura no es del producto en sí). */
+  coverNote?: string;
   video?: string;
   gallery: string[];
   featured: boolean;
-  year: number;
+  year?: number;
   country: string;
   url?: string;
-  chat?: ChatScript;
   architecture?: Architecture;
 };
 
@@ -71,5 +72,6 @@ export type Launch = {
   name: string;
   url: string;
   category: string;
-  location: string;
+  /** Solo si el propio sitio lo dice. */
+  location?: string;
 };

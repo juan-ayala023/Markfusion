@@ -2,14 +2,17 @@ import { launches } from "./launches";
 import { projects } from "./projects";
 import type { Metric } from "./types";
 
-const countries = new Set(
-  [...projects.map((project) => project.country), "Ghana", "Argentina"], // Air Ghana y MATU están en launches
-);
+// Todo se calcula con el contenido real del sitio: nada de cifras de ejemplo.
+const launchUrls = new Set(launches.map((launch) => launch.url));
+const projectsWithoutSite = projects.filter((project) => !project.url || !launchUrls.has(project.url)).length;
+const countries = new Set([...projects.map((project) => project.country), "Ghana"]); // Air Ghana
 
-/** Métricas globales de la home. Las dos primeras se calculan con el contenido real del sitio. */
 export const globalMetrics: Metric[] = [
-  { label: "Proyectos en producción", value: projects.length + launches.length, prefix: "+" },
-  { label: "Países con clientes", value: countries.size },
-  { label: "Flujos automatizados", value: 120, prefix: "+" }, // TODO: confirmar
-  { label: "Horas manuales eliminadas al mes", value: 2000, prefix: "+" }, // TODO: confirmar
+  { label: "Proyectos entregados", value: launches.length + projectsWithoutSite },
+  { label: "Sitios web en producción", value: launches.length },
+  {
+    label: "Proyectos de IA y automatización",
+    value: projects.filter((project) => project.category.some((category) => category === "ia" || category === "automatizacion")).length,
+  },
+  { label: "Países", value: countries.size },
 ];

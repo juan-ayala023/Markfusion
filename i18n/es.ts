@@ -66,8 +66,8 @@ const es = {
     },
     demos: {
       flow: {
-        title: "n8n · pedidos-cosecharte",
-        done: "Ejecución exitosa · 1,4 s",
+        title: "n8n · flujo de pedidos (ejemplo)",
+        done: "Ejecución exitosa",
         nodes: [
           { id: "trigger", title: "Shopify", sub: "Nuevo pedido", col: 0 },
           { id: "ai", title: "Agente IA", sub: "Valida datos", col: 1 },
@@ -84,9 +84,9 @@ const es = {
         ],
       },
       dashboard: {
-        title: "Growth OS · Panel",
+        title: "Panel · ejemplo",
         chart: "Reservas por mes",
-        deploy: "Deploy en Vercel · 38 s",
+        deploy: "Deploy en Vercel",
         kpis: [
           { label: "Reservas", value: 128, delta: "+18%" },
           { label: "Ingresos", value: 42.6, prefix: "$", suffix: "M", decimals: 1, delta: "+24%" },
@@ -130,8 +130,6 @@ const es = {
     visit: "Ver sitio en vivo",
     challenge: "El reto",
     solution: "La solución",
-    inAction: "El agente en acción",
-    inActionDescription: "Una conversación real reproducida paso a paso, con lo que hace el sistema por detrás.",
     architecture: "Arquitectura",
     architectureDescription: "Cómo se conectan las piezas del sistema.",
     swipe: "Desliza para ver el flujo completo →",
@@ -153,43 +151,30 @@ const es = {
     eyebrow: "Proceso",
     title: "Cómo trabajamos.",
     description: "De la primera llamada a un sistema que opera solo, en cinco etapas claras.",
-    duration: "Duración",
-    deliverables: "Entregables",
     stepLabel: "Etapa",
-    // TODO: confirmar duraciones reales de cada etapa
     steps: [
       {
         title: "Diagnóstico",
         description:
           "Entendemos tu operación, dónde se pierden tiempo y dinero, y qué vale la pena automatizar primero.",
-        duration: "1 semana",
-        deliverables: ["Mapa de procesos", "Oportunidades priorizadas por impacto", "Propuesta y presupuesto"],
       },
       {
         title: "Arquitectura",
         description:
           "Diseñamos el sistema completo antes de escribir código: flujos, datos, integraciones y la experiencia de quien lo usa.",
-        duration: "1 a 2 semanas",
-        deliverables: ["Diagrama de arquitectura", "Prototipo navegable", "Plan de entregas"],
       },
       {
         title: "Construcción",
-        description: "Desarrollamos en entregas cortas. Cada semana ves avances funcionando, no promesas.",
-        duration: "3 a 8 semanas",
-        deliverables: ["Demos semanales", "Código en tu repositorio", "Pruebas y QA"],
+        description: "Desarrollamos en entregas cortas para que veas avances funcionando, no promesas.",
       },
       {
         title: "Automatización",
         description:
           "Conectamos IA y flujos n8n a tus sistemas para que la operación corra sola, con alertas cuando algo necesita a una persona.",
-        duration: "1 a 3 semanas",
-        deliverables: ["Agentes entrenados con tu negocio", "Flujos n8n monitoreados", "Alertas y reportes"],
       },
       {
         title: "Escala",
         description: "Medimos, optimizamos y crecemos contigo: nuevas funciones, más canales y soporte continuo.",
-        duration: "Continuo",
-        deliverables: ["Dashboard de métricas", "Mejoras mensuales", "Soporte y mantenimiento"],
       },
     ],
   },
@@ -263,7 +248,7 @@ const es = {
     eyebrow: "Contacto",
     title: "¿Construimos el tuyo?",
     description:
-      "Cuéntanos qué quieres resolver. Te respondemos en menos de 24 horas hábiles con los siguientes pasos para tu diagnóstico.", // TODO: confirmar tiempo de respuesta
+      "Cuéntanos qué quieres resolver y te contactamos para agendar tu diagnóstico.",
     direct: "O escríbenos directo",
     whatsapp: "WhatsApp",
     email: "Correo",

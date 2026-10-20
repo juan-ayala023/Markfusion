@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { CaseSection } from "@/components/case/case-section";
 import { ProjectCover } from "@/components/projects/project-cover";
 import { ArrowIcon, ButtonLink } from "@/components/ui/button";
-import { ChatReplay } from "@/components/ui/chat-replay";
 import { Counter } from "@/components/ui/counter";
 import { BrowserFrame, PhoneFrame } from "@/components/ui/device-frame";
 import { FlowDiagram } from "@/components/ui/flow-diagram";
@@ -59,7 +58,7 @@ export default async function CaseStudyPage({ params }: Params) {
 
   const meta = [
     { label: t.client, value: project.client },
-    { label: t.year, value: String(project.year) },
+    ...(project.year ? [{ label: t.year, value: String(project.year) }] : []),
     { label: t.country, value: project.country },
     { label: t.services, value: project.category.map((category) => dict.projects.categories[category]).join(" · ") },
   ];
@@ -107,18 +106,25 @@ export default async function CaseStudyPage({ params }: Params) {
         </div>
       </header>
 
-      <div className="container-x">
-        <ProjectCover project={project} priority sizes="(min-width: 1280px) 1216px, 100vw" />
-      </div>
+      {/* Sin captura real no hay portada: el título ya presenta al cliente */}
+      {project.cover && (
+        <div className="container-x">
+          <ProjectCover project={project} priority sizes="(min-width: 1280px) 1216px, 100vw" />
+          {project.coverNote && <p className="mt-3 text-xs text-subtle">{project.coverNote}</p>}
+        </div>
+      )}
 
-      <CaseSection label={t.challenge} className="pt-24 md:pt-32">
-        <p className="max-w-3xl text-[clamp(1.35rem,2.4vw,2rem)] font-medium leading-snug tracking-[-0.02em] text-fg">
-          {project.challenge}
-        </p>
-      </CaseSection>
+      {project.challenge && (
+        <CaseSection label={t.challenge} className="pt-24 md:pt-32">
+          <p className="max-w-3xl text-[clamp(1.35rem,2.4vw,2rem)] font-medium leading-snug tracking-[-0.02em] text-fg">
+            {project.challenge}
+          </p>
+        </CaseSection>
+      )}
 
-      <CaseSection label={t.solution}>
-        <p className="max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">{project.solution}</p>
+      {(project.solution || project.highlights) && (
+      <CaseSection label={t.solution} className={project.challenge ? undefined : "pt-24 md:pt-32"}>
+        {project.solution && <p className="max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">{project.solution}</p>}
         {project.highlights && (
           <ul className="mt-10 grid gap-3 sm:grid-cols-2">
             {project.highlights.map((highlight) => (
@@ -132,13 +138,6 @@ export default async function CaseStudyPage({ params }: Params) {
           </ul>
         )}
       </CaseSection>
-
-      {project.chat && (
-        <CaseSection label={t.inAction} description={t.inActionDescription}>
-          <SpotlightCard className="h-[520px] p-3 sm:h-[560px] sm:p-4">
-            <ChatReplay script={project.chat} labels={dict.chat} />
-          </SpotlightCard>
-        </CaseSection>
       )}
 
       {project.architecture && (
@@ -163,6 +162,7 @@ export default async function CaseStudyPage({ params }: Params) {
         </CaseSection>
       )}
 
+      {project.stack.length > 0 && (
       <CaseSection label={t.stack}>
         <ul className="flex flex-wrap gap-2.5">
           {project.stack.map((tech) => {
@@ -180,7 +180,9 @@ export default async function CaseStudyPage({ params }: Params) {
           })}
         </ul>
       </CaseSection>
+      )}
 
+      {project.metrics.length > 0 && (
       <CaseSection label={t.results}>
         <dl className="grid gap-4 sm:grid-cols-3">
           {project.metrics.map((metric) => (
@@ -193,6 +195,7 @@ export default async function CaseStudyPage({ params }: Params) {
           ))}
         </dl>
       </CaseSection>
+      )}
 
       {Story && (
         <CaseSection label={t.story}>

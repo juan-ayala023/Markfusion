@@ -6,6 +6,7 @@ import { useRef } from "react";
 import type { Project } from "@/content/types";
 import type { Dictionary } from "@/i18n";
 import { formatMetric } from "@/lib/format";
+import { cn } from "@/lib/utils";
 
 type ProjectCardProps = {
   project: Project;
@@ -37,7 +38,10 @@ export function ProjectCard({ project, cover, dict }: ProjectCardProps) {
               playsInline
               preload="none"
               aria-hidden
-              className="absolute inset-x-0 bottom-0 top-[37px] h-[calc(100%-37px)] w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              className={cn(
+                "absolute inset-x-0 bottom-0 w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100",
+                project.cover ? "top-[37px] h-[calc(100%-37px)]" : "top-0 h-full",
+              )}
             />
           )}
         </div>
@@ -52,7 +56,7 @@ export function ProjectCard({ project, cover, dict }: ProjectCardProps) {
       <div className="mt-5 flex items-start justify-between gap-6 px-1">
         <div>
           <p className="label-mono text-subtle">
-            {project.client} · {project.year}
+            {[project.client, project.year].filter(Boolean).join(" · ")}
           </p>
           <h3 className="mt-2.5 text-xl font-semibold tracking-tight text-fg sm:text-2xl">{project.title}</h3>
         </div>

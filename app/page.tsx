@@ -19,8 +19,8 @@ export default function HomePage() {
       <StackMarquee dict={dict.stack} />
       <Pillars dict={dict.pillars} chatLabels={dict.chat} />
       <Metrics dict={dict.metrics} />
-      <Projects dict={dict.projects} />
       <Launches dict={dict.launches} />
+      <Projects dict={dict.projects} />
       <Process dict={dict.process} />
       <LiveDemo dict={dict.demo} />
       <Testimonials dict={dict.testimonials} />
